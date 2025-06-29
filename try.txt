@@ -1,0 +1,290 @@
+
+import React, { useEffect, useState } from 'react';
+import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+const socialLinks = [
+  {
+    href: 'mailto:rahiljain1366@gmail.com',
+    icon: <FaEnvelope />,
+    label: 'Email',
+  },
+  {
+    href: 'https://www.linkedin.com/in/rahil-jain-3129961b5/',
+    icon: <FaLinkedin />,
+    label: 'LinkedIn',
+  },
+  {
+    href: 'https://github.com/RahilJain1366',
+    icon: <FaGithub />,
+    label: 'GitHub',
+  },
+  {
+    href: '/Rahil_Jain_Resume.pdf',
+    icon: <FaFileDownload />,
+    label: 'Resume',
+    download: true,
+  },
+];
+
+const SocialLink = ({ href, icon, label, download }) => (
+  <a
+    href={href}
+    target={download ? '_self' : '_blank'}
+    rel={download ? undefined : 'noopener noreferrer'}
+    download={download}
+    aria-label={label}
+    className="flex items-center gap-2 hover:underline hover:text-yellow-300 transition duration-300"
+  >
+    {icon} {label}
+  </a>
+);
+
+const DarkModeToggle = ({ enabled, onToggle }) => (
+  <label
+    htmlFor="darkModeToggle"
+    className="fixed top-4 right-4 z-50 flex items-center cursor-pointer select-none bg-white dark:bg-gray-800 px-4 py-2 rounded shadow border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+    aria-label="Toggle dark mode"
+  >
+    <input
+      id="darkModeToggle"
+      type="checkbox"
+      className="sr-only"
+      checked={enabled}
+      onChange={onToggle}
+    />
+    <span className="text-gray-900 dark:text-gray-200 font-medium">
+      {enabled ? 'Light Mode' : 'Dark Mode'}
+    </span>
+  </label>
+);
+
+const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    AOS.init({ duration: 800 });
+    console.log("👋 Hi there! Curious about my code? Let’s connect: rahiljain1366@gmail.com");
+  }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  return (
+    <>
+      <DarkModeToggle enabled={darkMode} onToggle={() => setDarkMode(!darkMode)} />
+      <div className="bg-gray-100 dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-100 transition-colors duration-500">
+        <nav
+          className="sticky top-0 z-50 bg-gray-800 text-white shadow-md transition duration-300 hover:shadow-lg"
+          aria-label="Primary navigation"
+        >
+          <ul className="flex justify-center space-x-6 py-4 text-sm md:text-base">
+            {['about', 'experience', 'projects', 'skills', 'certs'].map((id) => (
+              <li key={id}>
+                <a href={`#${id}`} className="hover:underline focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                  {id.charAt(0).toUpperCase() + id.slice(1)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <header
+          className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white text-center py-10 px-4"
+          aria-label="Introduction"
+        >
+          <div className="flex flex-col items-center md:flex-row md:justify-center md:items-center gap-6 max-w-4xl mx-auto">
+            <img
+              src={process.env.PUBLIC_URL + '/rahil-profile.jpg'}
+              alt="Portrait of Rahil Jain"
+              className="w-28 h-28 rounded-full border-4 border-white shadow-md mb-4 md:mb-0 transform hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+            <div className="text-center md:text-left max-w-xl">
+              <h1 className="text-4xl font-bold tracking-tight">Rahil Jain</h1>
+              <p className="text-lg mt-2 font-semibold">Software Engineer | Machine Learning Enthusiast</p>
+              <nav aria-label="Contact and social links" className="mt-4 flex justify-center md:justify-start flex-wrap gap-4 text-white">
+                {socialLinks.map(({ href, icon, label, download }) => (
+                  <SocialLink key={label} href={href} icon={icon} label={label} download={download} />
+                ))}
+              </nav>
+            </div>
+          </div>
+        </header>
+
+        <main className="max-w-4xl mx-auto p-4 sm:p-6">
+          {/* About Section */}
+          <section id="about" className="mb-10" data-aos="fade-up" aria-labelledby="about-title">
+            <h2 id="about-title" className="text-2xl font-semibold mb-4 text-primary border-b-2 border-accent inline-block">
+              About Me
+            </h2>
+            <article className="bg-gray-800 rounded-lg shadow-md p-6 text-gray-100 leading-relaxed">
+              <p>
+                I am Rahil Jain, a graduate student in Computer Engineering at UT Dallas with a passion for building intelligent systems and solving real-world problems. My expertise spans machine learning, quantum computing, embedded systems, and full-stack software development. I have led projects involving reinforcement learning, quantum optimization algorithms, and wearable tech for accessibility. Additionally, I've developed scalable banking APIs and deployed deep learning models for medical imaging and agricultural applications. I thrive in both independent and collaborative settings, aiming to bridge research and impactful engineering solutions.
+              </p>
+            </article>
+          </section>
+
+          {/* Experience Section */}
+          <section id="experience" className="mb-10" data-aos="fade-up" aria-labelledby="experience-title">
+            <h2 id="experience-title" className="text-2xl font-semibold mb-6">Experience</h2>
+            <div className="grid grid-cols-1 gap-6">
+              {/* Experience cards */}
+              {/* Each can be extracted to its own component for further cleanliness */}
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Student Assistant position at University of Texas at Dallas">
+                <h3 className="text-lg font-semibold">Student Assistant, University of Texas at Dallas, Richardson, USA</h3>
+                <p className="text-sm text-gray-400">January 2025 – April 2025</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>Built a custom Binary Neural Network (BNN) using principles of probabilistic computing for FPGA implementation.</li>
+                  <li>Designed a custom loss function and optimized fine-tuning to improve convergence and stability.</li>
+                  <li>Achieved 85% accuracy on MNIST and 60% on CIFAR-10 while enhancing model efficiency.</li>
+                </ul>
+              </article>
+
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Software Engineer at Bafna Sons">
+                <h3 className="text-lg font-semibold">Software Engineer, Bafna Sons, Chennai, India</h3>
+                <p className="text-sm text-gray-400">May 2023 – July 2024</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>Designed dashboards for inventory management using Pandas, Seaborn, and Matplotlib.</li>
+                  <li>Streamlined product performance analysis, increasing inventory turnover by 20% in Q1 2024.</li>
+                  <li>Built a Django-based backend managing inventory and delivering insights to 5+ teams.</li>
+                </ul>
+              </article>
+
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Software Engineer at Temenos India Pvt Ltd">
+                <h3 className="text-lg font-semibold">Software Engineer, Temenos India Pvt Ltd, Chennai, India</h3>
+                <p className="text-sm text-gray-400">August 2021 – February 2023</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>Led Java-based Trading Calendar API development for two country-specific banks, improving compliance and efficiency by 10%.</li>
+                  <li>Directed migration of 1000+ APIs from R07 to R20 for 15+ banks using InfoBasic, Java, and JQL.</li>
+                  <li>Resolved bugs during beta testing ensuring regulatory compliance.</li>
+                  <li>Received Tstar Award for high-quality delivery in Trading Calendar APIs (Q4 2022).</li>
+                </ul>
+              </article>
+
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Software Engineer Intern at Temenos India Pvt Ltd">
+                <h3 className="text-lg font-semibold">Software Engineer Intern, Temenos India Pvt Ltd, Chennai, India</h3>
+                <p className="text-sm text-gray-400">February 2021 – August 2021</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>Contributed to Java-based Teller APIs design, enabling integration for Teller Blotter systems.</li>
+                  <li>Assisted R&D for T24 core banking product; earned certifications in Payments API, Java, and SQL.</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          {/* Projects Section */}
+          <section id="projects" className="mb-10" data-aos="fade-up" aria-labelledby="projects-title">
+            <h2 id="projects-title" className="text-2xl font-semibold mb-6">Projects</h2>
+            <div className="grid grid-cols-1 gap-6">
+              {/* Repeat similar article structure for projects */}
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Classification of Plant Diseases using Deep Learning">
+                <h3 className="text-lg font-semibold">Classification of Plant Diseases using Deep Learning</h3>
+                <p className="text-sm text-gray-400">January 2025 – April 2025</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>Developed a high-resolution classification system using ResNet50 and Vision Transformer features.</li>
+                  <li>Integrated super-resolution preprocessing for better detection in challenging leaf images.</li>
+                  <li>Combined CNN/ViT features with SVM for accurate multiclass predictions in noisy conditions.</li>
+                  <li>Deployed a Flask dashboard for real-time image input and disease diagnosis.</li>
+                </ul>
+                <a
+                  href="https://github.com/RahilJain1366/Classification-of-Plant-Diseases"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline mt-2 inline-block"
+                >
+                  GitHub Repo →
+                </a>
+              </article>
+
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Reduction of Test Data Volume in SoC Design">
+                <h3 className="text-lg font-semibold">Reduction of Test Data Volume in SoC Design</h3>
+                <p className="text-sm text-gray-400">November 2024 – December 2024</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>C++ implementation based on a paper for test data compression using dictionaries and fixed-length indices.</li>
+                  <li>Modeled test data as a graph and used heuristic algorithms for clique partitioning and dictionary selection.</li>
+                  <li>Optimized test data volume in System-on-Chip designs, improving circuit testing efficiency.</li>
+                </ul>
+                <a
+                  href="https://github.com/RahilJain1366/Reduction-of-Test-Data-Volume-in-SoC-Design"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline mt-2 inline-block"
+                >
+                  GitHub Repo →
+                </a>
+              </article>
+
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Chromosome Classification using Deep Learning">
+                <h3 className="text-lg font-semibold">Chromosome Classification using Deep Learning</h3>
+                <p className="text-sm text-gray-400">March 2021 – July 2021</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>Built a deep learning model classifying all 23 human chromosomes with 96.6% accuracy.</li>
+                  <li>Automated karyotyping to reduce reliance on clinical experts.</li>
+                  <li>Used Python (TensorFlow, PyTorch, Keras), OpenCV, Docker, Coco Annotator, and Google Colab GPU.</li>
+                  <li>Model validated by clinical experts for chromosomal abnormality detection.</li>
+                </ul>
+                <a
+                  href="https://github.com/RahilJain1366/Classification-of-Chromosome"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline mt-2 inline-block"
+                >
+                  GitHub Repo →
+                </a>
+              </article>
+
+              <article className="bg-gray-800 rounded-lg shadow-md p-6" tabIndex="0" aria-label="Audio-Based Environment Simulator">
+                <h3 className="text-lg font-semibold">Audio-Based Environment Simulator</h3>
+                <p className="text-sm text-gray-400">January 2020</p>
+                <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+                  <li>Wearable prototype assisting visually impaired individuals using 3D sound navigation cues.</li>
+                  <li>Built with Python (TensorFlow, OpenCV) and Raspberry Pi 3 during a 24-hour hackathon.</li>
+                  <li>Designed as a cap-mounted device enabling spatial awareness for hands-free navigation.</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          {/* Skills Section */}
+          <section id="skills" className="mb-10" data-aos="fade-up" aria-labelledby="skills-title">
+            <h2 id="skills-title" className="text-2xl font-semibold mb-4">Skills</h2>
+            <div className="space-y-2 text-sm">
+              <p><strong>Languages:</strong> Python, Java, C++</p>
+              <p><strong>Tools & Frameworks:</strong> TensorFlow, PyTorch, Docker, Django, Pandas, MongoDB</p>
+            </div>
+          </section>
+
+          {/* Certifications Section */}
+          <section id="certs" data-aos="fade-up" aria-labelledby="certs-title">
+            <h2 id="certs-title" className="text-2xl font-semibold mb-4">Certifications</h2>
+            <ul className="list-disc pl-5 space-y-1 text-sm">
+              <li>Quantum Computing & Advanced ML – IIT Delhi</li>
+              <li>Reinforcement Learning – IIT Madras</li>
+            </ul>
+          </section>
+
+          {/* Fun Extras Section */}
+          <section className="mt-12 text-center" data-aos="fade-up" aria-label="Fun extras and contact prompt">
+            <h2 className="text-2xl font-semibold mb-4">🎛️ Fun Extras</h2>
+            <button
+              onClick={() => alert('Hello! Want to collaborate? Reach me via the links above.')}
+              className="bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-400"
+              aria-label="Contact Rahil to collaborate"
+            >
+              Get to know me better!
+            </button>
+          </section>
+        </main>
+      </div>
+    </>
+  );
+};
+
+export default App;

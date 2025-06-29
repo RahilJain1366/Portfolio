@@ -2,7 +2,7 @@
   "name": "rahil-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://RahilJain1366.github.io/rahil-portfolio",
+  "homepage": "https://RahilJain1366.github.io/PortfolioWebsite/",
   "dependencies": {
     "aos": "^2.3.4",
     "framer-motion": "^12.19.2",
@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
-    "gh-pages": "^6.0.0",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.21",
     "react-scripts": "^5.0.1",
     "tailwindcss": "^3.3.2"

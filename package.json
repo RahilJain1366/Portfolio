@@ -2,7 +2,7 @@
   "name": "rahil-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://RahilJain1366.github.io/PortfolioWebsite/",
+  "homepage": "https://RahilJain1366.github.io/",
   "dependencies": {
     "aos": "^2.3.4",
     "framer-motion": "^12.19.2",

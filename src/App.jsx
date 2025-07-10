@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { motion } from 'framer-motion';
+import { motion, useCycle } from 'framer-motion';
 
 const socialLinks = [
   { href: 'mailto:rahiljain1366@gmail.com', icon: <FaEnvelope />, label: 'Email' },
   { href: 'https://www.linkedin.com/in/rahil-jain-3129961b5/', icon: <FaLinkedin />, label: 'LinkedIn' },
   { href: 'https://github.com/RahilJain1366', icon: <FaGithub />, label: 'GitHub' },
-  { href: process.env.PUBLIC_URL + '/Rahil_Jain_Resume.pdf', icon: <FaFileDownload />, label: 'Resume', download: true },
+  { href: 'https://drive.google.com/file/d/1_o73bGtX1vp8eVvJsv2DFetYJS2b9_rK/view?usp=sharing', icon: <FaFileDownload />, label: 'Resume' },
 ];
 
 const SocialLink = ({ href, icon, label, download }) => (
@@ -29,6 +29,7 @@ const SkillBadge = ({ skill }) => (
     {skill}
   </span>
 );
+
 
 const ProjectCard = ({ title, timeframe, skills, description, link }) => (
   <article className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-gray-100  text-gray-100 rounded-lg shadow-md p-6 hover:scale-[1.01] transition-transform duration-300">
@@ -57,6 +58,33 @@ const ProjectCard = ({ title, timeframe, skills, description, link }) => (
   </article>
 );
 
+const cycleWords = ["Code", "Develop", "Test", "Deploy"];
+
+const AnimatedCycleWords = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIndex((prev) => (prev + 1) % cycleWords.length);
+    }, 2000); // Change every 2 seconds
+    return () => clearTimeout(timer);
+  }, [index]);
+
+  return (
+    <motion.h6
+      key={cycleWords[index]}
+      className="text-2xl md:text-3xl font-mono font-bold text-white mb-4 h-[2.5rem]" // fixed height prevents jump
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.6 }}
+    >
+      Here to <span className="text-orange-400">{cycleWords[index]}</span>.
+    </motion.h6>
+  );
+};
+
+
 const Section = ({ id, title, children }) => (
   <section id={id} className="mb-10" data-aos="fade-up">
     <h2 className="text-4xl md:text-5xl font-extrabold mb-8 tracking-tight bg-gradient-to-r from-black via-gray-800 to-black text-orange-400 inline-block px-4 py-2 rounded-lg shadow text-center w-full">
@@ -68,85 +96,123 @@ const Section = ({ id, title, children }) => (
   </section>
 );
 
-const AnimatedHero = () => (
-  <motion.section
-    className="relative flex flex-col md:flex-row items-center justify-center min-h-[60vh] py-10 px-4 bg-gradient-to-r from-black via-gray-800 to-black text-gray-100 overflow-hidden text-center md:text-left mb-2"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.8 }}
+const QuantumCircuitHeader = () => (
+  <header className="relative w-full min-h-[90vh] flex flex-col justify-between bg-gradient-to-r from-black via-gray-800 to-black overflow-hidden">
+    {/* Split circuit SVG background */}
+    <svg
+      className="absolute inset-0 w-full h-full z-0"
+      viewBox="0 0 1600 800"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ pointerEvents: 'none' }}
+    >
+      {/* Left side: dark circuit */}
+      <g opacity="0.18">
+        <rect x="0" y="0" width="800" height="800" fill="#18181b" />
+        <circle cx="120" cy="120" r="8" fill="#38bdf8" />
+        <line x1="120" y1="120" x2="320" y2="120" stroke="#38bdf8" strokeWidth="4" />
+        <circle cx="320" cy="120" r="8" fill="#38bdf8" />
+        <line x1="320" y1="120" x2="320" y2="320" stroke="#38bdf8" strokeWidth="4" />
+        <circle cx="320" cy="320" r="8" fill="#38bdf8" />
+      </g>
+      {/* Right side: dark circuit */}
+      <g opacity="0.13">
+        <rect x="800" y="0" width="800" height="800" fill="#27272a" />
+        <circle cx="1200" cy="200" r="8" fill="#60a5fa" />
+        <line x1="1200" y1="200" x2="1400" y2="200" stroke="#60a5fa" strokeWidth="4" />
+        <circle cx="1400" cy="200" r="8" fill="#60a5fa" />
+        <line x1="1400" y1="200" x2="1400" y2="400" stroke="#60a5fa" strokeWidth="4" />
+        <circle cx="1400" cy="400" r="8" fill="#60a5fa" />
+      </g>
+    </svg>
+    {/* Sticky Top nav bar with animated links */}
+<nav className="fixed top-0 z-50 flex justify-center items-center w-full pt-8 pb-4 bg-gradient-to-r from-black via-gray-800 to-black/80 bg-opacity-80 backdrop-blur-md border-b border-white/10">
+  <ul className="flex gap-8 md:gap-12 text-lg md:text-xl font-bold">
+    {[
+      {id:'#home',label:'00. Home'},
+      {id:'#about',label:'01. About'},
+      {id:'#experience',label:'02. Experience'},
+      {id:'#projects',label:'03. Projects'},
+      {id:'#certs',label:'04. Certifications'},
+    ].map((item,i)=>(
+      <motion.li
+        key={item.id}
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 + i * 0.12, type: 'spring' }}
+        whileHover={{ scale: 1.13, color: '#fbbf24' }}
+      >
+        <a href={item.id} className="text-white transition-colors duration-200 hover:text-orange-400">
+          <span className="text-orange-400 font-bold">{item.label.slice(0,3)}</span>{item.label.slice(3)}
+        </a>
+      </motion.li>
+    ))}
+  </ul>
+</nav>
+
+{/* Centered hero content with animated name and subtitle */}
+<div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-4 mt-8">
+  <motion.span
+    className="uppercase text-[18px] tracking-widest font-bold text-orange-400 mb-2"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 0.3 }}
+  >Hi, my name is </motion.span>
+  <motion.h1
+    className="text-5xl md:text-7xl font-extrabold text-white mb-2"
+    initial={{ scale: 0.8, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{ duration: 0.7, delay: 0.5, type: 'spring' }}
+  >Rahil Jain</motion.h1>
+
+  <motion.h2
+    className="text-xl md:text-2xl font-mono font-bold text-white mb-6"
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, delay: 1.1 }}
+  >I'm a <span className="text-orange-400">Software Engineer</span></motion.h2>
+
+  <AnimatedCycleWords />
+  <motion.div
+    className="flex flex-wrap gap-4 justify-center mt-2"
+    initial="hidden"
+    animate="visible"
+    variants={{
+      hidden: {},
+      visible: {
+        transition: {
+          staggerChildren: 0.1,
+          delayChildren: 1.3,
+        },
+      },
+    }}
   >
-    <div className="w-full max-w-6xl rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-6 md:p-10 flex flex-col md:flex-row items-center mx-auto">
-      <motion.img
-        src={process.env.PUBLIC_URL + '/rahil-profile.jpg'}
-        alt="Portrait of Rahil Jain"
-        className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white shadow-md object-cover mb-6 md:mb-0 md:mr-12"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.1, type: 'spring' }}
-      />
+    {socialLinks.map(({ href, icon, label, download }, i) => (
+      <motion.a
+        key={label}
+        href={href}
+        target={download ? '_self' : '_blank'}
+        rel={download ? undefined : 'noopener noreferrer'}
+        download={download}
+        aria-label={label}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/20 hover:bg-orange-100 text-white font-semibold shadow transition"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 1.4 + i * 0.1 }}
+        whileHover={{ scale: 1.1, backgroundColor: '#fbbf24', color: '#18181b' }}
+      >
+        {icon} {label}
+      </motion.a>
+    ))}
+  </motion.div>
 
-      <div className="flex flex-col items-center md:items-start space-y-4 max-w-xl">
-        <motion.h1
-          className="text-5xl md:text-6xl font-extrabold tracking-tight text-orange-400"
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          Rahil Jain
-        </motion.h1>
-
-        <motion.p
-          className="text-xl md:text-2xl text-gray-300 font-medium"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-        >
-          Software Engineer | Quantum Computing Explorer
-        </motion.p>
-
-        <motion.div
-          className="flex flex-wrap gap-4 justify-center md:justify-start mt-2"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.6,
-              },
-            },
-          }}
-        >
-          {socialLinks.map(({ href, icon, label, download }, i) => (
-            <motion.span
-              key={label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
-              whileHover={{ scale: 1.1 }}
-            >
-              <SocialLink href={href} icon={icon} label={label} download={download} />
-            </motion.span>
-          ))}
-        </motion.div>
-        {/* Section Navigation Bar INSIDE header bubble */}
-        <nav className="w-full flex justify-start mt-4">
-          <ul className="flex flex-wrap gap-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-xl shadow border border-white/20 px-6 py-2 items-center ml-0">
-            <li><a href="#about" className="text-orange-400 font-semibold hover:underline focus:underline transition">About</a></li>
-            <li><a href="#experience" className="text-orange-400 font-semibold hover:underline focus:underline transition">Experience</a></li>
-            <li><a href="#skills" className="text-orange-400 font-semibold hover:underline focus:underline transition">Skills</a></li>
-            <li><a href="#projects" className="text-orange-400 font-semibold hover:underline focus:underline transition">Projects</a></li>
-            <li><a href="#certs" className="text-orange-400 font-semibold hover:underline focus:underline transition">Certifications</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </motion.section>
+</div>
+</header>
 );
 
+
 const App = () => {
+  const [activeSection, setActiveSection] = useState('home');
   useEffect(() => {
     AOS.init({ duration: 800 });
 
@@ -184,12 +250,21 @@ const App = () => {
       transition={{ duration: 0.6 }}
       className="bg-gradient-to-r from-black via-gray-800 to-black min-h-screen text-gray-100 transition-colors duration-500"
     >
-      <AnimatedHero />
+      <QuantumCircuitHeader />
       <main className="max-w-4xl mx-auto p-4 sm:p-6 mt-0">
         {/* About Section */}
         <Section id="about" title="About Me">
-          <div className="rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
-            <p>
+        <div className="flex flex-col md:flex-row items-stretch gap-8 p-0 overflow-hidden">
+          <div className="w-full md:w-1/3 flex-shrink-0 flex items-stretch">
+            <img
+              src={process.env.PUBLIC_URL + '/rahil-profile.jpg'}
+              alt="Portrait of Rahil Jain"
+              className="object-cover w-full h-full md:h-auto md:min-h-[400px] md:max-h-none"
+              style={{ minHeight: '350px', maxHeight: '100%', objectPosition: 'center top' }}
+            />
+          </div>
+          <div className="flex-1 flex items-center p-6 md:p-10">
+            <p className="text-left">
               I’m a graduate student in Computer Engineering at the University of Texas at Dallas, specializing in Applied Machine Learning, with a CGPA of 3.94. My interests span machine learning, quantum computing, embedded systems, and scalable backend development.
               <br /><br />
               I’ve worked on projects involving binary neural networks, hybrid CNN-ViT models for image classification, Jira automation tools, and full-stack applications using Python, Bash, Flask, and React. I’m also exploring quantum computing through circuit simulations and frameworks like Qiskit, focusing on its potential in optimization and AI.
@@ -197,7 +272,8 @@ const App = () => {
               I’m passionate about building intelligent, efficient systems that connect research with real-world impact.
             </p>
           </div>
-        </Section>
+        </div>
+      </Section>
 
         {/* Experience Section */}
         <Section id="experience" title="Experience">

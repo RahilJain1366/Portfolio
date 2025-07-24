@@ -293,7 +293,7 @@ const App = () => {
             <div className="flex flex-col gap-8">
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
                 <ProjectCard
-                  title="Software Engineer Intern, Motorola Solutions Inc, Allen, USA"
+                  title="Software Engineering Intern, Motorola Solutions Inc, Allen, USA"
                   timeframe="January 2025 – April 2025"
                   skills={["C++", "Python", "Linux", "SQL", "PowerShell"]}
                   description={[

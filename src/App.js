@@ -8,7 +8,7 @@ const socialLinks = [
   { href: 'mailto:rahiljain1366@gmail.com', icon: <FaEnvelope />, label: 'Email' },
   { href: 'https://www.linkedin.com/in/rahil-jain-3129961b5/', icon: <FaLinkedin />, label: 'LinkedIn' },
   { href: 'https://github.com/RahilJain1366', icon: <FaGithub />, label: 'GitHub' },
-  { href: 'https://drive.google.com/file/d/1Q89bIqT0iJEK8ROxgYaYbSlmUscOx9qz/view?usp=sharing', icon: <FaFileDownload />, label: 'Resume' },
+  { href: 'https://drive.google.com/file/d/1Q89bIqT0iJEK8ROxgYaYbSlmUscOx9qz/preview', icon: <FaFileDownload />, label: 'Resume' },
 ];
 
 const SocialLink = ({ href, icon, label, download }) => (

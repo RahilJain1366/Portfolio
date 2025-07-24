@@ -293,6 +293,21 @@ const App = () => {
             <div className="flex flex-col gap-8">
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
                 <ProjectCard
+                  title="Software Engineer Intern, Motorola Solutions Inc, Allen, USA"
+                  timeframe="January 2025 – April 2025"
+                  skills={["C++", "Python", "Linux", "SQL", "PowerShell"]}
+                  description={[
+                    "Engineered backend automation scripts using Python and Bash to log, monitor, and report on firewall rules and agent activity",
+                    "for the Wave Radio Gateway, reducing manual tasks by 60%, and accelerating response to network anomalies.",
+                    "Validated and optimized RESTful APIs for the Wave Radio Gateway Lifecycle Management System using Postman and",
+                    "Python, ensuring robust backend integration, improving system reliability, and reducing API latency by 30%.",
+                    "Implemented DTLS connection verification in C++ using OpenSSL to decrypt and validate secure files, ensuring encrypted",
+                    "data integrity, enhancing diagnostics, and supporting secure communication across the Wave Radio Gateway platform."
+                  ]}
+                />
+              </div>
+              <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
+                <ProjectCard
                   title="Student Assistant, University of Texas at Dallas, Richardson, USA"
                   timeframe="January 2025 – April 2025"
                   skills={["BNN", "FPGA", "Python", "MNIST", "CIFAR-10"]}

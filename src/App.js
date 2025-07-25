@@ -97,7 +97,7 @@ const Section = ({ id, title, children }) => (
 );
 
 const QuantumCircuitHeader = () => (
-  <header className="relative w-full min-h-[90vh] flex flex-col justify-between bg-gradient-to-r from-black via-gray-800 to-black overflow-hidden">
+  <header id="home" className="relative w-full min-h-[90vh] flex flex-col justify-between bg-gradient-to-r from-black via-gray-800 to-black overflow-hidden">
     {/* Split circuit SVG background */}
     <svg
       className="absolute inset-0 w-full h-full z-0"
@@ -126,14 +126,14 @@ const QuantumCircuitHeader = () => (
       </g>
     </svg>
     {/* Sticky Top nav bar with animated links */}
-<nav className="fixed top-0 z-50 flex justify-center items-center w-full pt-8 pb-4 bg-gradient-to-r from-black via-gray-800 to-black/80 bg-opacity-80 backdrop-blur-md border-b border-white/10">
- <ul className="flex gap-8 md:gap-12 text-lg md:text-xl font-bold">
+<nav className="fixed top-0 z-50 flex justify-center items-center w-full pt-3 md:pt-8 pb-2 md:pb-4 bg-gradient-to-r from-black via-gray-800 to-black/80 bg-opacity-80 backdrop-blur-md border-b border-white/10">
+ <ul className="flex gap-3 xs:gap-4 sm:gap-6 md:gap-8 lg:gap-12 text-sm xs:text-base sm:text-lg md:text-lg lg:text-xl font-bold px-2 sm:px-4 overflow-x-auto max-w-full justify-center">
     {[
-      {id:'#home',label:'00. Home'},
-      {id:'#about',label:'01. About'},
-      {id:'#experience',label:'02. Experience'},
-      {id:'#projects',label:'03. Projects'},
-      {id:'#certs',label:'04. Certifications'},
+      {id:'#home',label:'Home'},
+      {id:'#about',label:'About'},
+      {id:'#experience',label:'Experience'},
+      {id:'#projects',label:' Projects'},
+      {id:'#certs',label:'Certifications'},
     ].map((item,i)=>(
       <motion.li
         key={item.id}
@@ -148,14 +148,14 @@ const QuantumCircuitHeader = () => (
           e.preventDefault();
           const el = document.getElementById(item.id.replace('#', ''));
           if (el) {
-            const yOffset = -80; // adjust this value to match your header height
+            const yOffset = window.innerWidth < 640 ? -40 : window.innerWidth < 768 ? -50 : -80; // even smaller offset for very small screens
             const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
           }
         }}
-        className="text-white transition-colors duration-200 hover:text-orange-400"
+        className="text-orange-400 transition-colors duration-200 hover:text-orange-300 whitespace-nowrap"
       >
-        <span className="text-orange-400 font-bold">{item.label.slice(0,3)}</span>{item.label.slice(3)}
+        {item.label}
       </a>
       </motion.li>
     ))}
@@ -163,9 +163,9 @@ const QuantumCircuitHeader = () => (
 </nav>
 
 {/* Centered hero content with animated name and subtitle */}
-<div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-4 mt-8">
+<div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-4 mt-4 md:mt-8">
   <motion.span
-    className="uppercase text-[18px] tracking-widest font-bold text-orange-400 mb-2"
+    className="uppercase text-sm md:text-[18px] tracking-widest font-bold text-orange-400 mb-2"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.7, delay: 0.3 }}
@@ -294,15 +294,12 @@ const App = () => {
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
                 <ProjectCard
                   title="Software Engineering Intern, Motorola Solutions Inc, Allen, USA"
-                  timeframe="January 2025 – April 2025"
+                  timeframe="May 2025 – Present"
                   skills={["C++", "Python", "Linux", "SQL", "PowerShell"]}
                   description={[
-                    "Engineered backend automation scripts using Python and Bash to log, monitor, and report on firewall rules and agent activity",
-                    "for the Wave Radio Gateway, reducing manual tasks by 60%, and accelerating response to network anomalies.",
-                    "Validated and optimized RESTful APIs for the Wave Radio Gateway Lifecycle Management System using Postman and",
-                    "Python, ensuring robust backend integration, improving system reliability, and reducing API latency by 30%.",
-                    "Implemented DTLS connection verification in C++ using OpenSSL to decrypt and validate secure files, ensuring encrypted",
-                    "data integrity, enhancing diagnostics, and supporting secure communication across the Wave Radio Gateway platform."
+                    "Engineered backend automation scripts using Python and Bash to log, monitor, and report on firewall rules and agent activity for the Wave Radio Gateway, reducing manual tasks by 60%, and accelerating response to network anomalies.",
+                    "Validated and optimized RESTful APIs for the Wave Radio Gateway Lifecycle Management System using Postman and Python, ensuring robust backend integration, improving system reliability, and reducing API latency by 30%.",
+                    "Implemented DTLS connection verification in C++ using OpenSSL to decrypt and validate secure files, ensuring encrypted data integrity, enhancing diagnostics, and supporting secure communication across the Wave Radio Gateway platform."
                   ]}
                 />
               </div>

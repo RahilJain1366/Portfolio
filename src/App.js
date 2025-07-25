@@ -98,9 +98,42 @@ const Section = ({ id, title, children }) => (
 
 const QuantumCircuitHeader = () => (
   <header id="home" className="relative w-full min-h-[90vh] flex flex-col justify-between bg-gradient-to-r from-black via-gray-800 to-black overflow-hidden">
+    {/* Starry background */}
+    <div className="absolute inset-0 w-full h-full z-0">
+      <div className="absolute w-1 h-1 bg-white rounded-full opacity-80 animate-pulse" style={{ top: '10%', left: '15%', animationDelay: '0s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-70 animate-pulse" style={{ top: '20%', left: '80%', animationDelay: '1s' }}></div>
+      <div className="absolute w-1.5 h-1.5 bg-blue-300 rounded-full opacity-60 animate-pulse" style={{ top: '15%', left: '60%', animationDelay: '2s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-90" style={{ top: '8%', left: '30%' }}></div>
+      <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-75 animate-pulse" style={{ top: '25%', left: '10%', animationDelay: '1.5s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-blue-200 rounded-full opacity-80" style={{ top: '12%', left: '90%' }}></div>
+      <div className="absolute w-1 h-1 bg-white rounded-full opacity-70 animate-pulse" style={{ top: '30%', left: '70%', animationDelay: '0.5s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-85" style={{ top: '18%', left: '45%' }}></div>
+      <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-60 animate-pulse" style={{ top: '35%', left: '25%', animationDelay: '2.5s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-75" style={{ top: '22%', left: '85%' }}></div>
+      <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-80 animate-pulse" style={{ top: '40%', left: '5%', animationDelay: '1.2s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70" style={{ top: '28%', left: '95%' }}></div>
+      <div className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-65 animate-pulse" style={{ top: '45%', left: '55%', animationDelay: '3s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-90" style={{ top: '38%', left: '35%' }}></div>
+      <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-55 animate-pulse" style={{ top: '50%', left: '15%', animationDelay: '0.8s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-80" style={{ top: '42%', left: '75%' }}></div>
+      <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-70 animate-pulse" style={{ top: '55%', left: '90%', animationDelay: '2.2s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-85" style={{ top: '48%', left: '40%' }}></div>
+      <div className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-60 animate-pulse" style={{ top: '60%', left: '20%', animationDelay: '1.8s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-75" style={{ top: '52%', left: '65%' }}></div>
+      <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-50 animate-pulse" style={{ top: '65%', left: '80%', animationDelay: '2.8s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-85" style={{ top: '58%', left: '10%' }}></div>
+      <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-65 animate-pulse" style={{ top: '70%', left: '50%', animationDelay: '0.3s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-90" style={{ top: '62%', left: '85%' }}></div>
+      <div className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-70 animate-pulse" style={{ top: '75%', left: '30%', animationDelay: '2.5s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-80" style={{ top: '68%', left: '95%' }}></div>
+      <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-45 animate-pulse" style={{ top: '80%', left: '60%', animationDelay: '1.3s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-75" style={{ top: '72%', left: '15%' }}></div>
+      <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-85 animate-pulse" style={{ top: '85%', left: '40%', animationDelay: '2.7s' }}></div>
+      <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-60" style={{ top: '78%', left: '70%' }}></div>
+    </div>
     {/* Split circuit SVG background */}
     <svg
-      className="absolute inset-0 w-full h-full z-0"
+      className="absolute inset-0 w-full h-full z-10"
       viewBox="0 0 1600 800"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +196,7 @@ const QuantumCircuitHeader = () => (
 </nav>
 
 {/* Centered hero content with animated name and subtitle */}
-<div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-4 mt-4 md:mt-8">
+<div className="relative z-20 flex flex-col items-center justify-center flex-1 text-center px-4 mt-4 md:mt-8">
   <motion.span
     className="uppercase text-sm md:text-[18px] tracking-widest font-bold text-orange-400 mb-2"
     initial={{ opacity: 0, y: 20 }}
@@ -260,10 +293,53 @@ const App = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-gradient-to-r from-black via-gray-800 to-black min-h-screen text-gray-100 transition-colors duration-500"
+      className="relative bg-gradient-to-r from-black via-gray-800 to-black min-h-screen text-gray-100 transition-colors duration-500 overflow-hidden"
     >
+      {/* Extended starry background for entire body */}
+      <div className="fixed inset-0 w-full h-full z-0">
+        {/* Upper section stars */}
+        <div className="absolute w-1 h-1 bg-white rounded-full opacity-80 animate-pulse" style={{ top: '5%', left: '12%', animationDelay: '0s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-70 animate-pulse" style={{ top: '8%', left: '88%', animationDelay: '1s' }}></div>
+        <div className="absolute w-1.5 h-1.5 bg-blue-300 rounded-full opacity-60 animate-pulse" style={{ top: '12%', left: '65%', animationDelay: '2s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-90" style={{ top: '15%', left: '25%' }}></div>
+        <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-75 animate-pulse" style={{ top: '18%', left: '5%', animationDelay: '1.5s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-blue-200 rounded-full opacity-80" style={{ top: '22%', left: '95%' }}></div>
+        
+        {/* Middle section stars */}
+        <div className="absolute w-1 h-1 bg-white rounded-full opacity-70 animate-pulse" style={{ top: '35%', left: '18%', animationDelay: '0.5s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-85" style={{ top: '38%', left: '72%' }}></div>
+        <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-60 animate-pulse" style={{ top: '42%', left: '8%', animationDelay: '2.5s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-75" style={{ top: '45%', left: '92%' }}></div>
+        <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-80 animate-pulse" style={{ top: '48%', left: '35%', animationDelay: '1.2s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70" style={{ top: '52%', left: '58%' }}></div>
+        <div className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-65 animate-pulse" style={{ top: '55%', left: '15%', animationDelay: '3s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-90" style={{ top: '58%', left: '85%' }}></div>
+        
+        {/* Lower section stars */}
+        <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-55 animate-pulse" style={{ top: '65%', left: '22%', animationDelay: '0.8s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-80" style={{ top: '68%', left: '78%' }}></div>
+        <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-70 animate-pulse" style={{ top: '72%', left: '5%', animationDelay: '2.2s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-85" style={{ top: '75%', left: '45%' }}></div>
+        <div className="absolute w-1 h-1 bg-blue-200 rounded-full opacity-60 animate-pulse" style={{ top: '78%', left: '88%', animationDelay: '1.8s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-orange-400 rounded-full opacity-75" style={{ top: '82%', left: '12%' }}></div>
+        <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-50 animate-pulse" style={{ top: '85%', left: '68%', animationDelay: '2.8s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-85" style={{ top: '88%', left: '35%' }}></div>
+        <div className="absolute w-1 h-1 bg-orange-300 rounded-full opacity-65 animate-pulse" style={{ top: '92%', left: '82%', animationDelay: '0.3s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-90" style={{ top: '95%', left: '28%' }}></div>
+        
+        {/* Additional scattered stars for density */}
+        <div className="absolute w-0.5 h-0.5 bg-blue-200 rounded-full opacity-70" style={{ top: '28%', left: '42%' }}></div>
+        <div className="absolute w-1 h-1 bg-white rounded-full opacity-60 animate-pulse" style={{ top: '32%', left: '78%', animationDelay: '1.7s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-orange-300 rounded-full opacity-80" style={{ top: '62%', left: '48%' }}></div>
+        <div className="absolute w-1 h-1 bg-blue-300 rounded-full opacity-75 animate-pulse" style={{ top: '25%', left: '52%', animationDelay: '2.3s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-65" style={{ top: '38%', left: '28%' }}></div>
+        <div className="absolute w-1.5 h-1.5 bg-orange-400 rounded-full opacity-55 animate-pulse" style={{ top: '72%', left: '62%', animationDelay: '1.1s' }}></div>
+        <div className="absolute w-0.5 h-0.5 bg-blue-200 rounded-full opacity-85" style={{ top: '82%', left: '52%' }}></div>
+        <div className="absolute w-1 h-1 bg-white rounded-full opacity-70 animate-pulse" style={{ top: '15%', left: '75%', animationDelay: '2.7s' }}></div>
+      </div>
+      
       <QuantumCircuitHeader />
-      <main className="max-w-4xl mx-auto p-4 sm:p-6 mt-0">
+      <main className="relative z-10 max-w-4xl mx-auto p-4 sm:p-6 mt-0">
         {/* About Section */}
         <Section id="about" title="About Me">
         <div className="flex flex-col md:flex-row items-stretch gap-8 p-0 overflow-hidden">

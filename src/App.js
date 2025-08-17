@@ -325,7 +325,7 @@ const App = () => {
       transition={{ duration: 0.6 }}
       className="relative bg-gradient-to-r from-black via-gray-800 to-black min-h-screen text-gray-100 transition-colors duration-500 overflow-hidden"
     >
-      {/* Extended starry background for entire body */}
+      {/* Extended starry background for entire body*/}
       <div className="fixed inset-0 w-full h-full z-0">
         {/* Upper section stars */}
         <div className="absolute w-1 h-1 bg-white rounded-full opacity-80 animate-pulse" style={{ top: '5%', left: '12%', animationDelay: '0s' }}></div>

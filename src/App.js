@@ -31,14 +31,44 @@ const SkillBadge = ({ skill }) => (
 );
 
 
-const ProjectCard = ({ title, timeframe, skills, description, link }) => (
+const ProjectCard = ({ title, timeframe, skills, description, link, image }) => (
+  <article className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-gray-100 rounded-lg shadow-md p-6 hover:scale-[1.01] transition-transform duration-300">
+    <h3 className="text-xl font-semibold text-orange-400">{title}</h3>
+    <p className="text-sm text-gray-300">{timeframe}</p>
+    <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
+      {/*description.map((point, idx) => (
+        <li key={idx}>{point}</li>
+      ))*/
+        description.join(' ')
+      }
+    </ul>
+    <div className="mt-3 flex flex-wrap gap-2">
+      {skills.map((skill) => (
+        <SkillBadge key={skill} skill={skill} />
+      ))}
+    </div>
+    {link && (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-orange-400 hover:underline mt-2 inline-block"
+      >
+        GitHub Repo →
+      </a>
+    )}
+  </article>
+);
+
+const WorkCard = ({ title, timeframe, skills, description, link, image }) => (
   <article className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-gray-100 rounded-lg shadow-md p-6 hover:scale-[1.01] transition-transform duration-300">
     <h3 className="text-xl font-semibold text-orange-400">{title}</h3>
     <p className="text-sm text-gray-300">{timeframe}</p>
     <ul className="list-disc pl-5 mt-3 space-y-1 text-sm">
       {description.map((point, idx) => (
         <li key={idx}>{point}</li>
-      ))}
+      ))
+      }
     </ul>
     <div className="mt-3 flex flex-wrap gap-2">
       {skills.map((skill) => (
@@ -368,7 +398,7 @@ const App = () => {
           <div>
             <div className="flex flex-col gap-8">
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
-                <ProjectCard
+                <WorkCard
                   title="Software Engineering Intern, Motorola Solutions Inc, Allen, USA"
                   timeframe="May 2025 – Present"
                   skills={["C++", "Python", "Linux", "SQL", "PowerShell"]}
@@ -380,7 +410,7 @@ const App = () => {
                 />
               </div>
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
-                <ProjectCard
+                <WorkCard
                   title="Student Assistant, University of Texas at Dallas, Richardson, USA"
                   timeframe="January 2025 – April 2025"
                   skills={["BNN", "FPGA", "Python", "MNIST", "CIFAR-10"]}
@@ -393,7 +423,7 @@ const App = () => {
                 />
               </div>
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
-                <ProjectCard
+                <WorkCard
                   title="Software Engineer, Bafna Sons, Chennai, India"
                   timeframe="May 2023 – July 2024"
                   skills={["Pandas", "Seaborn", "Matplotlib", "Django"]}
@@ -409,7 +439,7 @@ const App = () => {
                 />
               </div>
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
-                <ProjectCard
+                <WorkCard
                   title="Software Engineer, Temenos India Pvt Ltd, Chennai, India"
                   timeframe="August 2021 – February 2023"
                   skills={["Java", "JQL", "InfoBasic", "APIs"]}
@@ -425,7 +455,7 @@ const App = () => {
                 />
               </div>
               <div className="min-w-[320px] rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-white/30 p-5">
-                <ProjectCard
+                <WorkCard
                   title="Software Engineer Intern, Temenos India Pvt Ltd, Chennai, India"
                   timeframe="February 2021 – August 2021"
                   skills={["Java", "SQL", "API Design"]}
@@ -560,19 +590,31 @@ const App = () => {
 
         {/* Projects Section */}
         <Section id="projects" title="Projects">
-          <div className="flex flex-row flex-wrap gap-8 justify-between">
+          <div className="flex flex-col gap-8 justify-between">
+            <div className="min-w-[320px] flex-1 rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-gray-700 p-5">
+              <ProjectCard
+                title="Implementation of a Real-Time Currency Converter in Rust"
+                timeframe="June 2025 - July 2025"
+                skills={["Rust","dotenv", "CLI", "Tokio", "Serde", "Reqwest"]}
+                description={[
+                  "Developed a lightweight command-line (CLI) application in Rust for real-time currency conversion using live financial data from exchangeratesapi.io. Implemented asynchronous programming with Tokio and Reqwest for efficient REST API integration, along with Serde for JSON parsing and Mutex for thread-safe data handling. Ensured secure API key management with dotenv and .env files, while maintaining a modular code structure (main.rs, lib.rs, utils.rs) for scalability. Delivered an interactive terminal interface with input validation, error handling, and formatted output, providing a robust and secure FinTech solution for converting between international currencies."
+                ]}
+
+                link="https://github.com/RahilJain1366/Currency_Convertor"
+                //image = "/Classification_Plants_DL.jpg"
+              />
+            </div>
+            </div>
+          <div className="flex flex-col gap-8 justify-between">
             <div className="min-w-[320px] flex-1 rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-gray-700 p-5">
               <ProjectCard
                 title="Classification of Plant Diseases using Deep Learning"
                 timeframe="January 2025 – April 2025"
                 skills={["ResNet50", "Vision Transformer", "SVM", "Flask"]}
                 description={[
-                  "Developed high-resolution classification using ResNet50 and Vision Transformer features.",
-                  "Used super-resolution preprocessing for better leaf detection.",
-                  "Combined CNN/ViT features with SVM for accurate predictions.",
-                  "Deployed Flask dashboard for real-time diagnosis."
-                ]}
+                  "Plant Disease Classification using Deep Learning (Jan 2025 – Apr 2025): Built a real-time system for detecting plant diseases from leaf images using a hybrid CNN–Vision Transformer–SVM architecture. The model achieved 91.12% accuracy across 23 disease categories, with super-resolution preprocessing for enhanced leaf detection. Deployed via a Flask dashboard, enabling scalable, real-time diagnosis as a practical alternative to NDVI-based methods in precision agriculture."]}
                 link="https://github.com/RahilJain1366/Classification-of-Plant-Diseases"
+                //image = "/Classification_Plants_DL.jpg"
               />
             </div>
             <div className="min-w-[320px] flex-1 rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-gray-700 p-5">
@@ -581,11 +623,10 @@ const App = () => {
                 timeframe="Nov 2024 – Dec 2024"
                 skills={["C++", "Graph Algorithms", "Compression"]}
                 description={[
-                  "Implemented test data compression using dictionary + fixed-length indices.",
-                  "Modeled test data as graph; used clique partitioning and heuristics.",
-                  "Improved circuit testing efficiency."
+                  "Implemented a C++ solution for reducing test data volume in System-on-Chip (SoC) design using dictionary-based compression with fixed-length indices. Modeled test patterns as a graph and applied heuristic clique partitioning algorithms to optimize dictionary selection for maximum compression efficiency. Improved circuit testing performance by minimizing test data storage and transfer requirements, leveraging concepts from VLSI design, EDA tools, and graph algorithms."
                 ]}
                 link="https://github.com/RahilJain1366/Reduction-of-Test-Data-Volume-in-SoC-Design"
+                //image="/Soc_Design.jpg"
               />
             </div>
             <div className="min-w-[320px] flex-1 rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-gray-700 p-5">
@@ -594,11 +635,10 @@ const App = () => {
                 timeframe="March 2021 – July 2021"
                 skills={["TensorFlow", "PyTorch", "Keras", "OpenCV"]}
                 description={[
-                  "Classified 23 chromosomes with 96.6% accuracy using DL.",
-                  "Automated karyotyping and reduced expert dependency.",
-                  "Validated by clinical experts."
+                "Automated karyotyping with a deep learning pipeline, achieving 96.6% accuracy across all 23 human chromosomes. Used EfficientNet-B6 with LapSRN super-resolution, along with object detection via Detectron2 and YOLOv4, and trained classifiers including ResNet, VGG-16, and custom CNNs. Annotated ~2,480 chromosome strands using COCO Annotator, with training on Google Colab GPUs, validated by clinical experts."
                 ]}
                 link="https://github.com/RahilJain1366/Classification-of-Chromosome"
+                //image="/Classification_Chromosome.jpg"
               />
             </div>
             <div className="min-w-[320px] flex-1 rounded-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-lg border border-gray-700 p-5">
@@ -607,10 +647,9 @@ const App = () => {
                 timeframe="January 2020"
                 skills={["TensorFlow", "OpenCV", "Raspberry Pi"]}
                 description={[
-                  "Wearable 3D sound system for visually impaired.",
-                  "Cap-mounted device for spatial awareness.",
-                  "Built in 24-hour hackathon."
+                  "Developed a wearable assistive technology prototype for visually impaired navigation, integrating Mask R-CNN for real-time object detection and instance segmentation with OpenCV and sensor inputs on Raspberry Pi 3. Converted environmental information into 3D spatial audio cues, enhancing spatial awareness and enabling real-time navigation assistance. The project demonstrates embedded systems programming, wearable device development, human-computer interaction, and rapid prototyping, completed within a 24-hour hackathon, with a focus on accessibility solutions and audio-based environment simulation."
                 ]}
+                //image="/Audio_Based_Env_Sim.jpg"
               />
             </div>
           </div>

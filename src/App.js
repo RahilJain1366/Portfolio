@@ -230,23 +230,12 @@ const Section = ({ id, title, children, theme = 'dark' }) => {
 
 // Hero header with parallax
 const QuantumCircuitHeader = ({ theme, toggleTheme, mobileMenuOpen, setMobileMenuOpen }) => {
-  const { y: parallaxY } = useParallax(0.4);
-
   return (
     <header id="home" className={`relative w-full min-h-[90vh] flex flex-col justify-between overflow-hidden transition-colors duration-500 ${
       theme === 'dark' 
         ? 'bg-gradient-to-r from-black via-gray-800 to-black'
         : 'bg-white'
     }`}>
-      {/* Subtle gradient spotlight background */}
-      <motion.div
-        className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-        style={{ y: parallaxY }}
-      >
-        <div className="absolute w-96 h-96 bg-orange-500/10 rounded-full blur-3xl top-20 -left-32 opacity-0 dark:opacity-20"></div>
-        <div className="absolute w-96 h-96 bg-orange-600/10 rounded-full blur-3xl bottom-32 -right-32 opacity-0 dark:opacity-20"></div>
-      </motion.div>
-
       {/* Sticky Top Nav */}
       <nav className={`fixed top-0 z-50 flex justify-between items-center w-full pt-3 md:pt-8 pb-2 md:pb-4 backdrop-blur-md border-b transition-colors duration-500 px-4 ${
         theme === 'dark'

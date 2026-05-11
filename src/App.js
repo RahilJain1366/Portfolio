@@ -3,6 +3,8 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload, FaSun, FaMoon, FaBars
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { motion } from 'framer-motion';
+import ProjectCard from './components/ProjectCard';
+import ProjectsSection from './components/ProjectsSection';
 
 // ============================================
 // SCROLL-DRIVEN ANIMATION HOOK
@@ -56,57 +58,6 @@ const SkillBadge = ({ skill, theme = 'dark' }) => {
     >
       {skill}
     </motion.span>
-  );
-};
-
-// Glassmorphism Card Components
-const ProjectCard = ({ title, timeframe, skills, description, link, theme = 'dark' }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  return (
-    <motion.article
-      className={`rounded-2xl shadow-xl p-6 border backdrop-blur-md transition-all duration-300 will-change-transform cursor-default ${
-        theme === 'dark'
-          ? 'bg-white/8 border-white/15 hover:bg-white/12 hover:border-white/25'
-          : 'bg-black/8 border-black/15 hover:bg-black/12 hover:border-black/25'
-      }`}
-      onHoverStart={() => !prefersReducedMotion && setIsHovered(true)}
-      onHoverEnd={() => !prefersReducedMotion && setIsHovered(false)}
-      animate={isHovered && !prefersReducedMotion ? { translateY: -6, boxShadow: '0 20px 60px rgba(0,0,0,0.3)' } : { translateY: 0, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
-      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-    >
-      <h3 className={`text-xl font-semibold mb-1 ${
-        theme === 'dark' ? 'text-white' : 'text-black'
-      }`}>{title}</h3>
-      <p className={`text-sm mb-4 ${
-        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-      }`}>{timeframe}</p>
-      <p className={`text-sm leading-relaxed mb-4 ${
-        theme === 'dark' ? 'text-gray-200' : 'text-gray-900'
-      }`}>
-        {description.length > 0 ? (typeof description[0] === 'string' ? description.join(' ') : description[0]) : ''}
-      </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {skills.map((skill) => (
-          <SkillBadge key={skill} skill={skill} theme={theme} />
-        ))}
-      </div>
-      {link && (
-        <motion.a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`hover:opacity-70 mt-4 inline-block text-sm font-semibold transition-opacity duration-200 ${
-            theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
-          }`}
-          whileHover={!prefersReducedMotion ? { x: 4 } : undefined}
-          transition={{ duration: 0.2 }}
-        >
-          GitHub Repo →
-        </motion.a>
-      )}
-    </motion.article>
   );
 };
 
@@ -746,147 +697,9 @@ const App = () => {
       </div>
 
       {/* Projects Section */}
-      <main className="relative z-10 max-w-4xl mx-auto p-4 sm:p-6 md:p-8">
+      <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-6 md:p-8">
         <Section id="projects" title="Projects" theme={theme}>
-          <motion.div
-            className="flex flex-col gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.1,
-                },
-              },
-            }}
-          >
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-            >
-              <ProjectCard
-                title="SecureConfigLLM"
-                timeframe="March 2026 – May 2026"
-                skills={["Python", "GroqAPI (Llama-3-8B/70B)", "RAG", "Scapy", "Nginx", "Docker", "PostgreSQL", "Pytest"]}
-                theme={theme}
-                description={[
-                  "SecureConfigLLM is a trust-but-verify framework designed to automate the generation of complex network configurations for Nginx, Iptables, and DNS while ensuring 100% compliance with deterministic security baselines. Traditionally, while LLMs can accelerate configuration tasks, they often introduce high-risk vulnerabilities like insecure ports or open recursion that require manual auditing. To solve this, I engineered a hybrid architecture that pairs a Large Language Model (Llama-3) with a custom-built deterministic validation engine. The core of the system is an agentic self-healing loop: when the validator identifies a security violation, it automatically re-prompts the model with specific failure logs, forcing an iterative self-correction cycle until the output is secure. Beyond generation, I integrated a high-throughput MITM analysis pipeline using Scapy to ingest live traffic and PCAP files, providing real-time risk scoring and threat interpretation reports. This project successfully reduced the end-to-end generation and verification cycle from several minutes of manual effort to under 30 seconds, providing a scalable solution for secure infrastructure automation."
-                ]}
-                link="https://github.com/RahilJain1366/NetSec"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-            >
-              <ProjectCard
-                title="Hybrid Quantum-Classical Model for Wildfire Spread Optimization in California"
-                timeframe="March 2026 – April 2026"
-                skills={["Python", "Qiskit", "Quantum Computing", "AWS (S3, Sagemaker, Braket)", "VQE"]}
-                theme={theme}
-                description={[
-                  "I participated in the Deloitte Quantum Challenge 2026 to solve enterprise-scale optimization problems using near-term quantum computing techniques. I had to develop a scalable hybrid quantum-classical framework capable of efficient optimization and benchmarking against classical methods. So, I engineered parameterized quantum circuits using Python and Qiskit, implemented QAOA/VQE-inspired workflows, statevector simulation, transpilation, qubit mapping, noise-aware execution, and modular experiment pipelines integrating classical optimizers with quantum measurements. This delivered a reproducible optimization prototype demonstrating scalable hybrid workflows, improved expertise in NISQ computing, Hamiltonian optimization, quantum circuit engineering, and performance benchmarking under realistic hardware constraints."
-                ]}
-                link="https://github.com/RahilJain1366/Deloitte_Quantum_Challenge_2026"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-            >
-              <ProjectCard
-                title="Implementation of a Real-Time Currency Converter in Rust"
-                timeframe="June 2025 - July 2025"
-                skills={["Rust", "dotenv", "CLI", "Tokio", "Serde", "Reqwest"]}
-                theme={theme}
-                description={[
-                  "Developed a lightweight command-line (CLI) application in Rust for real-time currency conversion using live financial data from exchangeratesapi.io. Implemented asynchronous programming with Tokio and Reqwest for efficient REST API integration, along with Serde for JSON parsing and Mutex for thread-safe data handling. Ensured secure API key management with dotenv and .env files, while maintaining a modular code structure (main.rs, lib.rs, utils.rs) for scalability. Delivered an interactive terminal interface with input validation, error handling, and formatted output, providing a robust and secure FinTech solution for converting between international currencies."
-                ]}
-                link="https://github.com/RahilJain1366/Currency_Convertor"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-            >
-              <ProjectCard
-                title="Classification of Plant Diseases using Deep Learning"
-                timeframe="January 2025 – April 2025"
-                skills={["ResNet50", "Vision Transformer", "SVM", "Flask"]}
-                theme={theme}
-                description={[
-                  "Built a real-time system for detecting plant diseases from leaf images using a hybrid CNN–Vision Transformer–SVM architecture. The model achieved 91.12% accuracy across 23 disease categories, with super-resolution preprocessing for enhanced leaf detection. Deployed via a Flask dashboard, enabling scalable, real-time diagnosis as a practical alternative to NDVI-based methods in precision agriculture."
-                ]}
-                link="https://github.com/RahilJain1366/Classification-of-Plant-Diseases"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-            >
-              <ProjectCard
-                title="Reduction of Test Data Volume in SoC Design"
-                timeframe="Nov 2024 – Dec 2024"
-                skills={["C++", "Graph Algorithms", "Compression"]}
-                theme={theme}
-                description={[
-                  "Implemented a C++ solution for reducing test data volume in System-on-Chip (SoC) design using dictionary-based compression with fixed-length indices. Modeled test patterns as a graph and applied heuristic clique partitioning algorithms to optimize dictionary selection for maximum compression efficiency. Improved circuit testing performance by minimizing test data storage and transfer requirements, leveraging concepts from VLSI design, EDA tools, and graph algorithms."
-                ]}
-                link="https://github.com/RahilJain1366/Reduction-of-Test-Data-Volume-in-SoC-Design"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-            >
-              <ProjectCard
-                title="Chromosome Classification using Deep Learning"
-                timeframe="March 2021 – July 2021"
-                skills={["TensorFlow", "PyTorch", "Keras", "OpenCV"]}
-                theme={theme}
-                description={[
-                  "Automated karyotyping with a deep learning pipeline, achieving 96.6% accuracy across all 23 human chromosomes. Used EfficientNet-B6 with LapSRN super-resolution, along with object detection via Detectron2 and YOLOv4, and trained classifiers including ResNet, VGG-16, and custom CNNs. Annotated ~2,480 chromosome strands using COCO Annotator, with training on Google Colab GPUs, validated by clinical experts."
-                ]}
-                link="https://github.com/RahilJain1366/Classification-of-Chromosome"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
-            >
-              <ProjectCard
-                title="Audio-Based Environment Simulator"
-                timeframe="January 2020"
-                skills={["TensorFlow", "OpenCV", "Raspberry Pi"]}
-                theme={theme}
-                description={[
-                  "Developed a wearable assistive technology prototype for visually impaired navigation, integrating Mask R-CNN for real-time object detection and instance segmentation with OpenCV and sensor inputs on Raspberry Pi 3. Converted environmental information into 3D spatial audio cues, enhancing spatial awareness and enabling real-time navigation assistance. The project demonstrates embedded systems programming, wearable device development, human-computer interaction, and rapid prototyping, completed within a 24-hour hackathon, with a focus on accessibility solutions and audio-based environment simulation."
-                ]}
-              />
-            </motion.div>
-          </motion.div>
+          <ProjectsSection theme={theme} />
         </Section>
 
         {/* Open Source Section */}
@@ -949,7 +762,7 @@ const App = () => {
             </div>
           </motion.div>
         </Section>
-      </main>
+      </div>
 
       {/* Footer spacing */}
       <div className="h-12"></div>

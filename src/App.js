@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 // ============================================
 // SCROLL-DRIVEN ANIMATION HOOK
@@ -27,16 +27,6 @@ const useScrollAnimation = (offset = 0) => {
   }, [offset]);
 
   return { ref, isInView };
-};
-
-// ============================================
-// PARALLAX HOOK
-// ============================================
-const useParallax = (speed = 0.4) => {
-  const ref = useRef(null);
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, (latest) => latest * speed);
-  return { ref, y };
 };
 
 // ============================================
@@ -68,32 +58,6 @@ const SkillBadge = ({ skill, theme = 'dark' }) => {
     </motion.span>
   );
 };
-
-const SkeletonLoader = () => (
-  <div className="animate-pulse">
-    <div className="h-8 bg-gray-700 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
-    <div className="h-4 bg-gray-700 dark:bg-gray-600 rounded w-full mb-2"></div>
-    <div className="h-4 bg-gray-700 dark:bg-gray-600 rounded w-5/6 mb-2"></div>
-    <div className="h-4 bg-gray-700 dark:bg-gray-600 rounded w-4/6"></div>
-  </div>
-);
-
-const SkeletonCard = () => (
-  <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-gray-100 rounded-lg shadow-md p-6 animate-pulse">
-    <div className="h-6 bg-gray-700 rounded w-3/4 mb-3"></div>
-    <div className="h-4 bg-gray-700 rounded w-1/2 mb-4"></div>
-    <div className="space-y-2 mb-4">
-      <div className="h-3 bg-gray-700 rounded w-full"></div>
-      <div className="h-3 bg-gray-700 rounded w-5/6"></div>
-      <div className="h-3 bg-gray-700 rounded w-4/6"></div>
-    </div>
-    <div className="flex gap-2">
-      <div className="h-6 bg-gray-700 rounded-full w-16"></div>
-      <div className="h-6 bg-gray-700 rounded-full w-16"></div>
-      <div className="h-6 bg-gray-700 rounded-full w-16"></div>
-    </div>
-  </div>
-);
 
 // Glassmorphism Card Components
 const ProjectCard = ({ title, timeframe, skills, description, link, theme = 'dark' }) => {
@@ -195,26 +159,6 @@ const WorkCard = ({ title, timeframe, skills, description, link, theme = 'dark' 
         </motion.a>
       )}
     </motion.article>
-  );
-};
-
-// Word-by-word text animation
-const AnimatedWords = ({ text, theme = 'dark' }) => {
-  const words = text.split(' ');
-  return (
-    <span>
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: i * 0.06, ease: 'easeOut' }}
-          viewport={{ once: true }}
-        >
-          {word}{' '}
-        </motion.span>
-      ))}
-    </span>
   );
 };
 
